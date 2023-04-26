@@ -8,6 +8,14 @@
     <script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
+    <h1>Python Code Chatbot</h1>
+    <form method="POST" action="/">
+        <input type="text" name="message">
+        <input type="submit" value="Send">
+    </form>
+    {% if AI_response != '' %}
+        <p>AI: {{ AI_response }}</p>
+    {% endif %}
     <pre><code class="python">
 import openai
 
