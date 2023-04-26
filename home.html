@@ -1,23 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Flask App</title>
+    <meta charset="UTF-8">
+    <title>Python Code</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
-  <h1>Chatbot</h1>
-  <input type="text" id="userInput" placeholder="Enter your message">
-  <button onclick="sendUserInput()">Send</button>
-  <div id="response"></div>
-  
-  <script>
-    function sendUserInput() {
-      var userInput = document.getElementById("userInput").value;
-      fetch("/chatbot/" + userInput)
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById("response").innerHTML = "<b>AI:</b> " + data;
-        });
-    }
-  </script>
+    <pre><code class="python">
+import openai
+
+openai.api_key = "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"
+
+
+def chatbot(prompt):
+  response = openai.Completion.create(model="text-davinci-003",
+                                      prompt=prompt,
+                                      n=1,
+                                      temperature=0.6,
+                                      max_tokens=2500,
+                                      stop=None)
+  print("\nAI:", response["choices"][0]['text'])
+
+
+# Interface
+
+print("\nAI:Hello! My name is Davinci.\n \tHow can I help you today?")
+
+while True:
+  user = input("\nYou: ")
+  if user != 'q':  # enter q to quit
+    chatbot(user)
+    #print("I hope this helps!")
+  else:
+    print("Thank you. See you next time")
+    break
+    </code>
+    </pre>
 </body>
 </html>
